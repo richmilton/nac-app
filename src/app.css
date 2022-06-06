@@ -1,0 +1,22 @@
+.game {
+  padding: 2em;
+  width: fit-content;
+}
+
+.square {
+  font-size: 2em;
+  font-weight: bold;
+  height: 2.5em;
+  width: 2.5em;
+}
+
+.game-over {
+  padding: 10px 0;
+  /*font-size: 2em;*/
+  font-weight: bold;
+}
+
+.fullwidth {
+  width: 100%;
+  text-align: center;
+}
