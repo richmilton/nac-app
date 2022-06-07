@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from './app';
 import Player from "./enums/player";
 
-const playGame = (moves: number[][]) => {
+const playGame = (moves: [number, number][]) => {
   moves.forEach((m) => {
     fireEvent.click(screen.getByRole('button', {
       name: `square-${m[0]}-${m[1]}`
@@ -11,7 +11,7 @@ const playGame = (moves: number[][]) => {
   })
 }
 
-describe('app', () => {
+describe('noughts and crosses app', () => {
   it('should render restart button', () => {
     render(<App />)
 
@@ -42,16 +42,22 @@ describe('app', () => {
 
     clickedButton = screen.getAllByText(Player.cross)
     expect(clickedButton).toHaveLength(1)
+  })
+
+  it('should clear the grid when the reset button is clicked', () => {
+    render(<App />)
+
+    playGame([[0, 0], [2, 0], [0, 1], [2, 1], [0,2]])
 
     fireEvent.click(screen.getByRole('button', {
       name: 'reset'
     }))
 
-    clickedButton = screen.queryAllByText(Player.nought)
-    expect(clickedButton).toHaveLength(0)
+    const noughtSquares = screen.queryAllByText(Player.nought)
+    expect(noughtSquares).toHaveLength(0)
 
-    clickedButton = screen.queryAllByText(Player.cross)
-    expect(clickedButton).toHaveLength(0)
+    const crossSquares = screen.queryAllByText(Player.cross)
+    expect(crossSquares).toHaveLength(0)
   })
 
   it('should show the correct result for a matching row', () => {
