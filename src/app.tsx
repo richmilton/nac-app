@@ -41,7 +41,7 @@ const App = () => {
 
   const setSquare = (coOrds: number[]) => {
     if (!state[coOrds[0]][coOrds[1]] && !winner) {
-      const currentState = [...state]
+      const currentState: GridState = [...state]
       currentState[coOrds[0]][coOrds[1]] = activePlayer
       setState(currentState)
       setActivePlayer(activePlayer === Player.nought ? Player.cross : Player.nought)

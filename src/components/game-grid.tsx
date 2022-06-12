@@ -2,13 +2,13 @@ import { Square } from "./square";
 import React from "react";
 import Player from "../enums/player";
 
-type Row = Player[]
-export type GridState = Row[]
+type Row = [Player, Player, Player]
+export type GridState = [Row, Row, Row]
 
 interface GridRowProps {
   parentState: GridState
   setSquare: any
-  index: number
+  rowIndex: number
 }
 
 interface GameGridProps {
@@ -16,15 +16,15 @@ interface GameGridProps {
   setSquare: any
 }
 
-const GridRow = ({ parentState, setSquare, index }: GridRowProps) => <div>
+const GridRow = ({ parentState, setSquare, rowIndex }: GridRowProps) => <div>
   {
-    parentState.map((_ , i: number) =>
-      <Square ariaLabel={`square-${index}-${i}`} key={i} setValue={() => { setSquare([index, i]) }} value={parentState[index][i]} />)
+    parentState.map((_ , squareIndex: number) =>
+      <Square ariaLabel={`square-${rowIndex}-${squareIndex}`} key={squareIndex} setValue={() => { setSquare([rowIndex, squareIndex]) }} value={parentState[rowIndex][squareIndex]} />)
   }
 </div>
 
 const GameGrid = ({ state, setSquare }: GameGridProps) => <>
-  {state.map((_, i) => <GridRow key={i} index={i} parentState={state} setSquare={setSquare} />)}
+  {state.map((_, i) => <GridRow key={i} rowIndex={i} parentState={state} setSquare={setSquare} />)}
 </>
 
 export default GameGrid
